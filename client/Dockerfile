@@ -12,4 +12,4 @@ RUN npm install
 EXPOSE 8081
 
 RUN npm run build
-CMD npm run preview
+CMD npm run serve

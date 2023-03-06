@@ -1,9 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
-  content: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'twixtter-blue': "#1d9bf0",
+        'twixtter-gray': "#313638",
+      },
+			fontFamily: {
+				'montserrat': ['Montserrat', 'sans-serif'],
+				'bebas-neue-exp': ['bebas-neue-pro-semiexpanded', 'Arial', 'sans-serif']
+			},
+    },
   },
   plugins: [],
 }
