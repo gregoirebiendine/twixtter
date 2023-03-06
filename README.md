@@ -3,7 +3,7 @@
 
 A personal clone of Twitter, used to improve my skills in Web development
 
-![Logo](./gitassets/twixtter_logo.png)
+<img src="./gitassets/twixtter_logo.png" width="100" />
 
 
 ## Run Locally
