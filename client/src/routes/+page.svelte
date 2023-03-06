@@ -1,13 +1,26 @@
-<script>
+<script lang="ts">
     import SignButton from "../components/SignButton.svelte";
+    import SignPopup from "../components/SignPopup.svelte";
+
+    let isPopupToggled: boolean = false;
+    let popupSignId: string;
+
+    const togglePopup = (id: string) => {
+        isPopupToggled = !isPopupToggled;
+        popupSignId = id;
+    };
 </script>
+
+{#if isPopupToggled}
+    <SignPopup signid={popupSignId} on:click={() => togglePopup('')}></SignPopup>
+{/if}
 
 <div class="w-screen h-screen flex justify-center items-center">
     <div class="absolute top-0 right-0 p-4">
-        <SignButton bordered={false}>
+        <SignButton bordered={false} on:click={() => togglePopup('signin')}>
             Sign In
         </SignButton>
-        <SignButton bordered={true}>
+        <SignButton bordered={true} on:click={() => togglePopup('signup')}>
             Sign Up
         </SignButton>
     </div>
