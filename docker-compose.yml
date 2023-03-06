@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+    twixtter_db:
+        image: mysql:latest
+        expose:
+            - 3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=area-${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        volumes:
+            - ./server/:/docker-entrypoint-initdb.d
+
+    twixtter_server:
+        build:
+            context: server/
+            dockerfile: Dockerfile
+        depends_on:
+            - twixtter_db
+        ports:
+            - 8080:8080
+        links:
+            - twixtter_db
+
+    twixtter_client:
+        build:
+            context: client/
+            dockerfile: Dockerfile
+        depends_on:
+            - twixtter_db
+            - twixtter_server
+        ports:
+            - 8081:8081
+        links:
+            - twixtter_db

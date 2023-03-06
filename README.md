@@ -11,32 +11,27 @@ A personal clone of Twitter, used to improve my skills in Web development
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/gregoirebiendine/twixtter
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd twixtter
 ```
 
-Install dependencies
-
-```bash
-  npm install
+Create your confidential .env file for MySQL in the root
+```
+MYSQL_ROOT_PASSWORD=YOUR_MYSQL_ROOT_PASSWORD
+MYSQL_DATABASE=twixtter_db
+MYSQL_USER=YOUR_MYSQL_USERNAME
+MYSQL_PASSWORD=YOUR_MYSQL_PASSWORD
 ```
 
-Start the front-end
+Build and run docker image
 
 ```bash
-  npm run start_front
-```
-
-
-Start the server
-
-```bash
-  npm run start_server
+  docker-compose up
 ```
 
 
@@ -45,6 +40,8 @@ Start the server
 **Client:** Svelte, TailwindCSS
 
 **Server:** Node, ExpressJS, PassportJS, MySQL
+
+**Containerization:** Docker
 
 
 ## Authors
