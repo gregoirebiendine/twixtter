@@ -1,8 +1,13 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
     export let signid: string;
+
+    const goToFeed = () => {
+        goto('/feed');
+    };
 </script>
 
-<div class="test w-full h-full fixed top-0 left-0 z-50 flex justify-center items-center transition-all duration-200 bg-gray-800 bg-opacity-70" data-aos="fade-in" data-aos-duration=500>
+<section class="test w-full h-full fixed top-0 left-0 z-50 flex justify-center items-center transition-all duration-200 bg-gray-800 bg-opacity-70" data-aos="fade-in" data-aos-duration=500>
     <div class="bg-white rounded-xl text-twixtter-gray p-20 relative" data-aos="fade-up" data-aos-duration=1000>
         <button on:click class="absolute top-4 right-4 hover-btn">
             <img class="w-[16px] select-none" src="/close-btn.png" alt="Close btn">
@@ -16,7 +21,7 @@
                 </p>
                 <input type="text" name='username' placeholder='Username' required />
                 <input type="password" name="password" placeholder='Password' required />
-                <button class="action-btn hover-btn">
+                <button on:click={goToFeed} class="action-btn hover-btn">
                     Sign In
                 </button>
             {:else if signid == 'signup'}
@@ -26,7 +31,7 @@
                 <input type="text" name='username' placeholder='Username' required />
                 <input type="text" name='email' placeholder='Email' required />
                 <input type="password" name="password" placeholder='Password' required />
-                <button class="action-btn hover-btn">
+                <button on:click={goToFeed} class="action-btn hover-btn">
                     Sign Up
                 </button>
             {/if}
@@ -36,7 +41,7 @@
             </button>
         </div>
     </div>
-</div>
+</section>
 
 <style lang="postcss">
     .action-btn {

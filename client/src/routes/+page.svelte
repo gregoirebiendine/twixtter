@@ -15,7 +15,7 @@
     <SignPopup signid={popupSignId} on:click={() => togglePopup('')}></SignPopup>
 {/if}
 
-<div class="w-screen h-screen flex justify-center items-center">
+<section class="w-screen h-screen flex justify-center items-center">
     <div class="absolute top-0 right-0 p-4">
         <SignButton bordered={false} on:click={() => togglePopup('signin')}>
             Sign In
@@ -36,4 +36,4 @@
         </p>
         <hr class="mt-1 bg-twixtter-gray w-full h-[3px] rounded-full">
     </div>
-</div>
+</section>
