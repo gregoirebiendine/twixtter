@@ -37,10 +37,10 @@ authRouter.post('/signup', (req, res) => {
 });
 
 authRouter.post('/islogin', (req, res) => {
-    if (req.isAuthenticated() == true)
+    if (req.isAuthenticated())
         res.status(200).send({user: req.user});
     else
-        res.sendStatus(401);
+        res.sendStatus(302);
 });
 
 authRouter.post('/logout', (req, res) => {

@@ -1,4 +1,8 @@
 <script lang="ts">
+    import axios from "axios";
+    import { onMount } from "svelte";
+    import { goto } from '$app/navigation';
+
     import SignButton from "../components/SignButton.svelte";
     import SignPopup from "../components/SignPopup.svelte";
 
