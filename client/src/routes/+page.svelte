@@ -1,5 +1,5 @@
 <script lang="ts">
-    import axios from "axios";
+    import axios, { type AxiosError, type AxiosResponse } from "axios";
     import { onMount } from "svelte";
     import { goto } from '$app/navigation';
 
@@ -15,13 +15,11 @@
     };
 
     onMount(() => {
-        axios.post("http://localhost:8080/api/auth/islogin", {}, {withCredentials: true}).then((res) => {
-            if (res.status === 200)
+        axios.post("http://localhost:8080/api/auth/islogin", {}, {withCredentials: true}).then((res: AxiosResponse) => {
+            if (res.data.user)
                 goto("/feed");
-        }).catch((err) => {
-            if (err.response.status !== 302) {
-                console.log("An error occured");
-            }
+        }).catch((err: AxiosError) => {
+            console.log(err.message);
         });
     });
 </script>
