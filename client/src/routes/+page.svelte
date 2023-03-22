@@ -13,6 +13,17 @@
         isPopupToggled = !isPopupToggled;
         popupSignId = id;
     };
+
+    onMount(() => {
+        axios.post("http://localhost:8080/api/auth/islogin", {}, {withCredentials: true}).then((res) => {
+            if (res.status === 200)
+                goto("/feed");
+        }).catch((err) => {
+            if (err.response.status !== 302) {
+                console.log("An error occured");
+            }
+        });
+    });
 </script>
 
 {#if isPopupToggled}
