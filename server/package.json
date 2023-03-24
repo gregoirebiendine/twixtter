@@ -9,7 +9,6 @@
   "author": "gregoirebiendine",
   "license": "ISC",
   "dependencies": {
-    "@d-fischer/passport-twitch": "^1.0.5",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -17,7 +16,6 @@
     "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
     "passport": "^0.6.0",
-    "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "uuid": "^9.0.0"
   },
