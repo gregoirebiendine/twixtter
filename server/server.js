@@ -25,8 +25,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const authRouter = require('./src/routes/auth/auth.js');
+const usersRouter = require('./src/routes/users/users.js');
 
 app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 
 app.listen(8080, () => {
     console.log(`Twixtter server launched on http://localhost:8080/`);
