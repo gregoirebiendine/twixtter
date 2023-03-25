@@ -73,7 +73,7 @@
                 <input type="text" name='username' placeholder='Username' required bind:value={formData.username}/>
                 <input type="text" name='email' placeholder='Email' required bind:value={formData.email}/>
                 <input type="password" name="password" placeholder='Password' required bind:value={formData.password}/>
-                <button class="submit-btn hover:bg-[#1887d1]" on:click={actionSignUp} disabled={submitDisabled}>
+                <button class="submit-btn hover:bg-twixtter-blue-dark" on:click={actionSignUp} disabled={submitDisabled}>
                     Sign Up
                 </button>
                     

@@ -1,7 +1,7 @@
-export default interface TwixtterUserData extends Object {
-    id: string,
-    username: string,
-    twixname: string,
-    email: string,
-    password: string
+import type TwixContent from './TwixContent'
+import type UserData from './UserData'
+
+export default interface TwixtterPorfileData extends Object {
+    user: UserData
+    twixs: Array<TwixContent>
 };

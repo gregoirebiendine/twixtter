@@ -1,9 +1,12 @@
 export default interface TwixContent {
-    username: string,
-    twixname: string,
+    id: string,
+    authorId: string,
+    authorUsername: string,
+    authorTwixname: string,
     textContent: string,
     mediaContent: string | null,
     commentNumber: number,
     retwixNumber: number,
-    likeNumber: number
+    likeNumber: number,
+    postDate: Date
 };

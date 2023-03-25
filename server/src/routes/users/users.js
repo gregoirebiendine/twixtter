@@ -7,14 +7,21 @@ const usersRouter = express.Router();
 usersRouter.use(authMiddleware);
 
 usersRouter.get('/:username', (req, res) => {
-    db.query(`SELECT * FROM users WHERE username = ?`, [req.params.username], (err, results) => {
+    db.query(`SELECT * FROM users WHERE username = ?`, [req.params.username], (err, userRes) => {
         if (err) {
             res.status(500).send({msg: "Internal server error"});
             throw err;
         }
-        if (results.length == 0)
+        if (userRes.length == 0)
             return res.sendStatus(404);
-        res.status(200).send({user: results[0]});
+        // res.status(200).send({user: userRes[0]});
+        db.query(`SELECT * FROM twixs WHERE authorId = ?`, [userRes[0].id], (err, twixsRes) => {
+            if (err) {
+                res.status(500).send({msg: "Internal server error"});
+                throw err;
+            }
+            res.status(200).send({user: userRes[0], twixs: twixsRes});
+        });
     });
 });
 

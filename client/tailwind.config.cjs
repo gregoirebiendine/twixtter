@@ -5,8 +5,9 @@ module.exports = {
     extend: {
       colors: {
         'twixtter-blue': "#1d9bf0",
+        'twixtter-blue-dark': "#1887d1",
         'twixtter-gray': "#313638",
-        'twixtter-gray-shaded': "#797c7e",
+        'twixtter-gray-light': "#797c7e",
       },
 			fontFamily: {
 				'montserrat': ['Montserrat', 'sans-serif'],

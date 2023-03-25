@@ -11,22 +11,28 @@
 
     const twixs: Array<TwixContent> = [
         {
-            username: 'lafranceauxfrancais',
-            twixname: 'Eric le GRAND Z',
+            id: '1',
+            authorId: '1',
+            authorUsername: 'lafranceauxfrancais',
+            authorTwixname: 'Eric le GRAND Z',
             textContent: "Les français en on plein le cul des arbres.<br>Nous DEVONS réimmigrer tout ces arbres d'où ils viennent.",
             mediaContent: null,
             commentNumber: 800,
             retwixNumber: 15800,
-            likeNumber: 160000
+            likeNumber: 160000,
+            postDate: new Date()
         },
         {
-            username: 'melio62',
-            twixname: 'Melio',
-            textContent: "HIN.",
-            mediaContent: "default_pp_bak.jpg",
+            id: '2',
+            authorId: '1',
+            authorUsername: 'lafranceauxfrancais',
+            authorTwixname: 'Eric le GRAND Z',
+            textContent: "HIN",
+            mediaContent: "media-content-test.jpg",
             commentNumber: 800,
             retwixNumber: 15800,
-            likeNumber: 160000
+            likeNumber: 160000,
+            postDate: new Date()
         }
     ];
 
@@ -59,7 +65,7 @@
 <section class="w-screen h-screen flex justify-center">
     <div class="h-full w-[40rem] border-x-[1px] border-gray-100 flex flex-col justify-start">
         <!-- Search Bar -->
-        <div class="rounded-full bg-gray-100 flex flex-row items-center mx-8 mt-1 border border-gray-100" bind:this={searchBar}>
+        <div class="rounded-full bg-gray-100 flex flex-row items-center mx-8 mt-2 border border-gray-100" bind:this={searchBar}>
             <div class="px-6">
                 <img class="w-[16px]" src="./search-icon.png" alt="search icon" />
             </div>
