@@ -6,6 +6,7 @@
     import { clickOutside } from "$lib/Events/ClickOutside";
     import type TwixContent from "$lib/Interfaces/TwixContent";
     import TwixPost from "$lib/Components/TwixPost.svelte";
+    import PageLayout from "$lib/Components/PageLayout.svelte";
 
     let searchBar: HTMLDivElement;
 
@@ -62,30 +63,27 @@
     });
 </script>
 
-<section class="w-screen h-screen flex justify-center">
-    <div class="h-full w-[40rem] border-x-[1px] border-gray-100 flex flex-col justify-start">
-        <!-- Search Bar -->
-        <div class="rounded-full bg-gray-100 flex flex-row items-center mx-8 mt-2 border border-gray-100" bind:this={searchBar}>
-            <div class="px-6">
-                <img class="w-[16px]" src="./search-icon.png" alt="search icon" />
-            </div>
-            <div class="w-full h-full">
-                <input id="searchbar" class="w-full h-12 bg-transparent outline-none rounded-full font-sans text-base" type="text" placeholder="Recherche Twixtter" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" use:clickOutside={unfocusSearchBar} on:click={focusSearchBar}>
-            </div>
+<PageLayout>
+    <!-- Search Bar -->
+    <div class="rounded-full bg-gray-100 flex flex-row items-center mx-8 mt-2 border border-gray-100" bind:this={searchBar}>
+        <div class="px-6">
+            <img class="w-[16px]" src="./search-icon.png" alt="search icon" />
         </div>
-
-        <!-- Content -->
-        <div class="flex flex-col mt-16">
-            <hr class="border-none bg-gray-100 w-full h-[1px]">
-            {#each twixs as twixcontent}
-                <TwixPost content={twixcontent}/>
-                <hr class="border-none bg-gray-100 w-full h-[1px]">
-            {/each}
+        <div class="w-full h-full">
+            <input id="searchbar" class="w-full h-12 bg-transparent outline-none rounded-full font-sans text-base" type="text" placeholder="Recherche Twixtter" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" use:clickOutside={unfocusSearchBar} on:click={focusSearchBar}>
         </div>
     </div>
 
+    <!-- Content -->
+    <div class="flex flex-col mt-16">
+        <hr class="border-none bg-gray-100 w-full h-[1px]">
+        {#each twixs as twixcontent}
+            <TwixPost content={twixcontent}/>
+            <hr class="border-none bg-gray-100 w-full h-[1px]">
+        {/each}
+    </div>
     <!-- <button on:click={logout}>LOGOUT</button> -->
-</section>
+</PageLayout>
 
 <style>
     input {
