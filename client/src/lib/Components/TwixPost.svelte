@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type TwixContent from "../lib/Interfaces/TwixContent";
+    import type TwixContent from "$lib/Interfaces/TwixContent";
 
     export let content: TwixContent;
 

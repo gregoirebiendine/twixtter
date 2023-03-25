@@ -1,6 +1,6 @@
 <script lang="ts">
     import type TwixtterPorfileData from "$lib/Interfaces/TwixtterUserData";
-    import TwixPost from "../../../components/TwixPost.svelte";
+    import TwixPost from "$lib/Components/TwixPost.svelte";
 
     /** @type {import('./$types').PageServerData} */
     export let data: TwixtterPorfileData;

@@ -3,8 +3,8 @@
     import { onMount } from "svelte";
     import { goto } from '$app/navigation';
 
-    import SignButton from "../components/SignButton.svelte";
-    import SignPopup from "../components/SignPopup.svelte";
+    import SignButton from "$lib/Components/SignButton.svelte";
+    import SignPopup from "$lib/Components/SignPopup.svelte";
 
     let isPopupToggled: boolean = false;
     let popupSignId: string;

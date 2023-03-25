@@ -3,9 +3,9 @@
     import { onMount } from "svelte";
     import { goto } from '$app/navigation';
     
-    import { clickOutside } from "../../lib/Events/ClickOutside";
-    import type TwixContent from "../../lib/Interfaces/TwixContent";
-    import TwixPost from "../../components/TwixPost.svelte";
+    import { clickOutside } from "$lib/Events/ClickOutside";
+    import type TwixContent from "$lib/Interfaces/TwixContent";
+    import TwixPost from "$lib/Components/TwixPost.svelte";
 
     let searchBar: HTMLDivElement;
 
