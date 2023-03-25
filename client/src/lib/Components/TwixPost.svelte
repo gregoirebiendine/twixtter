@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type TwixContent from "$lib/Interfaces/TwixContent";
+    import type TwixData from "$lib/Interfaces/TwixData";
 
-    export let content: TwixContent;
+    export let content: TwixData;
 
     function getTimeElapsedSincePost() {
         return Math.trunc((Date.now() - content.postDate.getTime()) / 1000)

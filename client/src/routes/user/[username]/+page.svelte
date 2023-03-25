@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type TwixtterPorfileData from "$lib/Interfaces/TwixtterUserData";
+    import type TwixtterPorfileData from "$lib/Interfaces/TwixtterPorfileData";
     import TwixPost from "$lib/Components/TwixPost.svelte";
     import PageLayout from "$lib/Components/PageLayout.svelte";
 

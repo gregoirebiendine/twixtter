@@ -4,13 +4,13 @@
     import { goto } from '$app/navigation';
     
     import { clickOutside } from "$lib/Events/ClickOutside";
-    import type TwixContent from "$lib/Interfaces/TwixContent";
+    import type TwixData from "$lib/Interfaces/TwixData";
     import TwixPost from "$lib/Components/TwixPost.svelte";
     import PageLayout from "$lib/Components/PageLayout.svelte";
 
     let searchBar: HTMLDivElement;
 
-    const twixs: Array<TwixContent> = [
+    const twixs: Array<TwixData> = [
         {
             id: '1',
             authorId: '1',

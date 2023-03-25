@@ -1,4 +1,4 @@
-export default interface TwixContent {
+export default interface TwixData {
     id: string,
     authorId: string,
     authorUsername: string,
