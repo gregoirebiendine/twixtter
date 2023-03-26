@@ -6,39 +6,11 @@
     import type TwixData from "$lib/Interfaces/TwixData";
     import TwixPost from "$lib/Components/TwixPost.svelte";
     import PageLayout from "$lib/Components/PageLayout.svelte";
-    import type UserData from "$lib/Interfaces/UserData";
 
     /** @type {import('./$types').PageServerData} */
-    export let data: UserData;
+    export let data: TwixData;
 
     let searchBar: HTMLDivElement;
-
-    const twixs: Array<TwixData> = [
-        {
-            id: '1',
-            authorId: '1',
-            authorUsername: 'lafranceauxfrancais',
-            authorTwixname: 'Eric le GRAND Z',
-            textContent: "Les français en on plein le cul des arbres.<br>Nous DEVONS réimmigrer tout ces arbres d'où ils viennent.",
-            mediaContent: null,
-            commentNumber: 800,
-            retwixNumber: 15800,
-            likeNumber: 160000,
-            postDate: new Date()
-        },
-        {
-            id: '2',
-            authorId: '1',
-            authorUsername: 'lafranceauxfrancais',
-            authorTwixname: 'Eric le GRAND Z',
-            textContent: "HIN",
-            mediaContent: "media-content-test.jpg",
-            commentNumber: 800,
-            retwixNumber: 15800,
-            likeNumber: 160000,
-            postDate: new Date()
-        }
-    ];
 
     function logout() {
         axios.post("http://localhost:8080/api/auth/logout", {}, {withCredentials: true}).then(() => {
@@ -70,12 +42,13 @@
 
     <!-- Content -->
     <div class="flex flex-col mt-16">
-        {data.id}
         <hr class="border-none bg-gray-100 w-full h-[1px]">
-        {#each twixs as twixcontent}
+        <!-- {#each twixs as twixcontent}
             <TwixPost content={twixcontent}/>
             <hr class="border-none bg-gray-100 w-full h-[1px]">
-        {/each}
+            {/each} -->
+        <TwixPost content={data}/>
+        <hr class="border-none bg-gray-100 w-full h-[1px]">
     </div>
     <button on:click={logout}>LOGOUT</button>
 </PageLayout>

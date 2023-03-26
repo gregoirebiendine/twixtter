@@ -4,7 +4,7 @@
     export let content: TwixData;
 
     function getTimeElapsedSincePost() {
-        return Math.trunc((Date.now() - content.postDate.getTime()) / 1000)
+        return Math.trunc((Date.now() - new Date(content.postDate).getTime()) / 1000); 
     }
 </script>
 
