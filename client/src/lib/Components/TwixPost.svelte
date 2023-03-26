@@ -22,7 +22,7 @@
                 </p>
             </div>
             <div>
-                <p class="font-montserrat text-base text-twixtter-gray">
+                <p class="font-sans text-base text-twixtter-gray">
                     {@html content.textContent}
                 </p>
                 {#if content.mediaContent}

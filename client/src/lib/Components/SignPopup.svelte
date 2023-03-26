@@ -82,7 +82,7 @@
     </div>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
     .submit-btn {
         @apply bg-twixtter-blue rounded-full font-montserrat text-xl font-bold text-white uppercase p-2 mt-12 transition-all duration-300;
     }

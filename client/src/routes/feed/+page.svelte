@@ -19,18 +19,22 @@
     };
 </script>
 
+<svelte:head>
+	<title>Twixtter - Feed</title>
+</svelte:head>
+
 <PageLayout>
     <SearchBar />
 
     <!-- Content -->
-    <div class="flex flex-col mt-16">
-        <hr class="border-none bg-gray-100 w-full h-[1px]">
+    <div class="flex flex-col mt-10">
+        <hr class="border-none bg-gray-200 w-full h-[1px]">
         <!-- {#each twixs as twixcontent}
             <TwixPost content={twixcontent}/>
             <hr class="border-none bg-gray-100 w-full h-[1px]">
             {/each} -->
         <TwixPost content={data}/>
-        <hr class="border-none bg-gray-100 w-full h-[1px]">
+        <hr class="border-none bg-gray-200 w-full h-[1px]">
     </div>
     <button on:click={logout}>LOGOUT</button>
 </PageLayout>

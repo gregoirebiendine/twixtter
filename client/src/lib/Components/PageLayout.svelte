@@ -25,7 +25,7 @@
             </p>
         </button>
     </div>
-    <div class="h-full w-[40rem] border-x-[1px] mx-8 border-gray-100 flex flex-col justify-start">
+    <div class="h-full w-[40rem] border-x-[1px] mx-8 border-gray-200 flex flex-col justify-start">
         <slot></slot>
     </div>
     <div class="flex flex-col">
