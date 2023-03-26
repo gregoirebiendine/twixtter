@@ -22,7 +22,7 @@
         </div>
         <div class="ml-4">
             <p class="font-montserrat font-bold text-xl text-twixtter-gray">{data.user.twixname}</p>
-            <p class="font-montserrat text-xs text-twixtter-gray-light">{data.twixs.length} Twixs</p>
+            <p class="font-montserrat text-xs text-twixtter-gray-light">{data.twixs.length} Twix{data.twixs.length > 1 ? 's' : ''}</p>
         </div>
     </div>
     <div class="w-full h-56 relative header border-b-[4px] border-twixtter-gray">

@@ -1,8 +1,4 @@
 <script lang="ts">
-    import axios, { type AxiosError, type AxiosResponse } from "axios";
-    import { onMount } from "svelte";
-    import { goto } from '$app/navigation';
-
     import SignButton from "$lib/Components/SignButton.svelte";
     import SignPopup from "$lib/Components/SignPopup.svelte";
 
@@ -13,15 +9,6 @@
         isPopupToggled = !isPopupToggled;
         popupSignId = id;
     };
-
-    onMount(() => {
-        axios.post("http://localhost:8080/api/auth/islogin", {}, {withCredentials: true}).then((res: AxiosResponse) => {
-            if (res.data.user)
-                goto("/feed");
-        }).catch((err: AxiosError) => {
-            console.log(err.message);
-        });
-    });
 </script>
 
 {#if isPopupToggled}

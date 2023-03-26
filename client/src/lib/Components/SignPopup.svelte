@@ -6,13 +6,13 @@
     let formEl: HTMLFormElement;
     let submitDisabled: boolean = true;
 
-    interface TwixtterFormData extends Object {
+    interface TwixtterSignFormData extends Object {
         username: string,
         email: string,
         password: string,
     }
 
-    const formData: TwixtterFormData = {
+    const formData: TwixtterSignFormData = {
         username: '',
         email: '',
         password: '',

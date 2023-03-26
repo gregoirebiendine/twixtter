@@ -40,7 +40,7 @@ authRouter.post('/islogin', (req, res) => {
     if (req.isAuthenticated())
         res.status(200).send({user: req.user});
     else
-        res.status(200).send({user: null});
+        res.status(401).send({user: null});
 });
 
 authRouter.post('/logout', (req, res) => {
