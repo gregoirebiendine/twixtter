@@ -48,10 +48,10 @@
     };
 </script>
 
-<section class="test w-full h-full fixed top-0 left-0 z-50 flex justify-center items-center transition-all duration-200 bg-gray-800 bg-opacity-70" data-aos="fade-in" data-aos-duration=500>
+<section class="test w-full h-full fixed top-0 left-0 z-50 flex justify-center items-center transition-all duration-200 bg-gray-800 bg-opacity-80" data-aos="fade-in" data-aos-duration=500>
     <div class="bg-white rounded-xl text-twixtter-gray p-20 relative" data-aos="fade-up" data-aos-duration=1000>
 
-        <button on:click class="absolute top-4 right-4 hover-btn p-2 hover:bg-gray-100 hover:rounded-full">
+        <button on:click class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100">
             <img class="w-[16px] select-none" src="/close-btn.png" alt="Close btn">
         </button>
         <form action="/" method="POST" class="flex flex-col justify-center" bind:this={formEl}>

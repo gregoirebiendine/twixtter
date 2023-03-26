@@ -30,24 +30,24 @@
                 {/if}
             </div>
             <div class="mt-2 flex flex-row">
-                <div class="rounded-2xl py-1 px-2 cursor-pointer hover:bg-gray-100">
-                    <img class="w-[16px] inline-block" src="/comment-icon.png" alt="Comment icon">
-                    <p class="font-montserrat text-xs text-twixtter-gray-light inline-block">
+                <button class="btn-twix-infos">
+                    <img class="w-[16px]" src="/comment-icon.png" alt="Comment icon">
+                    <p>
                         {content.commentNumber}
                     </p>
-                </div>
-                <div class="mx-6 rounded-2xl py-1 px-2 cursor-pointer hover:bg-gray-100">
-                    <img class="w-[16px] inline-block" src="/retwix-icon.png" alt="Comment icon">
-                    <p class="font-montserrat text-xs text-twixtter-gray-light inline-block">
+                </button>
+                <button class="mx-6 btn-twix-infos">
+                    <img class="w-[16px]" src="/retwix-icon.png" alt="Comment icon">
+                    <p>
                         {content.retwixNumber}
                     </p>
-                </div>
-                <div class="rounded-2xl py-1 px-2 cursor-pointer hover:bg-gray-100">
-                    <img class="w-[16px] inline-block" src="/like-icon.png" alt="Comment icon">
-                    <p class="font-montserrat text-xs text-twixtter-gray-light inline-block">
+                </button>
+                <button class="btn-twix-infos">
+                    <img class="w-[16px]" src="/like-icon.png" alt="Comment icon">
+                    <p>
                         {content.likeNumber}
                     </p>
-                </div>
+                </button>
             </div>
         </div>
     </div>
@@ -58,8 +58,20 @@
     </div> -->
 </article>
 
-<style lang="scss">
+<style lang="postcss">
     a:hover {
         text-decoration: underline;
+    }
+
+    .btn-twix-infos {
+        @apply p-2 flex justify-center items-center transition-all duration-200 rounded-full;
+    }
+    
+    .btn-twix-infos:hover {
+        @apply bg-gray-100;
+    }
+
+    .btn-twix-infos p {
+        @apply ml-1 font-montserrat text-xs text-twixtter-gray-light;
     }
 </style>
