@@ -12,7 +12,11 @@ CREATE TABLE users (
     password VARCHAR(128) NOT NULL UNIQUE,
     profileBio VARCHAR(192),
     profileLink VARCHAR(192),
-    profileLocation VARCHAR(64)
+    profileLocation VARCHAR(64),
+    profilePhoto VARCHAR(64) NOT NULL DEFAULT '/default_profile_photo.png',
+    profileHeader VARCHAR(64) NOT NULL DEFAULT '/default_profile_header.jpg',
+    followings JSON DEFAULT ('[]'),
+    followers JSON DEFAULT ('[]')
 );
 
 CREATE TABLE twixs (

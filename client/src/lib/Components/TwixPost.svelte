@@ -10,18 +10,18 @@
 
 <article class="w-full flex flex-col items-center py-6" data-post-id={content.id}>
     <div class="w-full flex flex-row px-6">
-        <div class="mr-4">
+        <a href={`/user/${content.authorUsername}`} class="block mr-2">
             <img class="w-[60px] rounded-full" src="/default_profile_photo.png" alt={`${content.authorUsername} photo`}>
-        </div>
+        </a>
         <div>
-            <div>
+            <div class="ml-2">
                 <p class="font-montserrat">
                     <a href={`/user/${content.authorUsername}`} class="text-base text-twixtter-gray font-bold mr-1">{content.authorTwixname}</a>
                     <span class="text-sm text-twixtter-gray-light">@{content.authorUsername}</span>
                     <span class="text-xs text-twixtter-gray-light">- {getTimeElapsedSincePost()}s</span>
                 </p>
             </div>
-            <div>
+            <div class="ml-2">
                 <p class="font-sans text-base text-twixtter-gray">
                     {@html content.textContent}
                 </p>

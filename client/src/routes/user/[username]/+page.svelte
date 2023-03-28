@@ -1,10 +1,13 @@
 <script lang="ts">
-    import type TwixtterPorfileData from "$lib/Interfaces/TwixtterPorfileData";
+    import type TwixtterProfileData from "$lib/Interfaces/TwixtterProfileData";
     import TwixPost from "$lib/Components/TwixPost.svelte";
     import PageLayout from "$lib/Components/PageLayout.svelte";
 
     /** @type {import('./$types').PageServerData} */
-    export let data: TwixtterPorfileData;
+    export let data: TwixtterProfileData;
+
+    let followings = JSON.parse(data.user.followings);
+    let followers = JSON.parse(data.user.followers);
 </script>
 
 <svelte:head>
@@ -25,9 +28,9 @@
             <p class="font-montserrat text-xs text-twixtter-gray-light">{data.twixs.length} Twix{data.twixs.length > 1 ? 's' : ''}</p>
         </div>
     </div>
-    <div class="w-full h-56 relative header border-b-[4px] border-twixtter-gray">
+    <div class="w-full h-56 relative header border-b-[4px] border-twixtter-gray" style="background: url('{data.user.profileHeader}') no-repeat center center">
         <div class="w-32 absolute bottom-0 left-4 translate-y-1/2 rounded-full bg-twixtter-gray p-1">
-            <img class="w-full rounded-full" src="/default_profile_photo.png" alt={`${data.user.username} photo`}>
+            <img class="w-full rounded-full" src={data.user.profilePhoto} alt={`${data.user.username} photo`}>
         </div>
     </div>
     <div class="flex justify-end p-4">
@@ -71,13 +74,13 @@
                 </p>
             </div>
 
-            <div class="mt-6">
+            <div class="mt-4">
                 <p class="font-montserrat leading-none inline-block mr-4">
-                    <span class="text-base text-twixtter-gray font-bold leading-none">0</span>
+                    <span class="text-base text-twixtter-gray font-bold leading-none">{followings.length}</span>
                     <span class="text-sm text-twixtter-gray-light leading-none">abonnements</span>
                 </p>
                 <p class="font-montserrat leading-none inline-block">
-                    <span class="text-base text-twixtter-gray font-bold leading-none">0</span>
+                    <span class="text-base text-twixtter-gray font-bold leading-none">{followers.length}</span>
                     <span class="text-sm text-twixtter-gray-light leading-none">abonnés</span>
                 </p>
             </div>
@@ -97,9 +100,3 @@
         {/if}
     </div>
 </PageLayout>
-
-<style lang="scss">
-    .header {
-        background: url("/default_profile_header.jpg") no-repeat center center;
-    }
-</style>

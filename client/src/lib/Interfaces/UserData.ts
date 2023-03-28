@@ -6,5 +6,9 @@ export default interface UserData extends Object {
     password: string,
     profileBio: string,
     profileLink: string,
-    profileLocation: string
+    profileLocation: string,
+    profilePhoto: string,
+    profileHeader: string,
+    followings: string,
+    followers: string
 };
