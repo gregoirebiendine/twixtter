@@ -13,8 +13,8 @@ CREATE TABLE users (
     profileBio VARCHAR(192),
     profileLink VARCHAR(192),
     profileLocation VARCHAR(64),
-    profilePhoto VARCHAR(64) NOT NULL DEFAULT '/default_profile_photo.png',
-    profileHeader VARCHAR(64) NOT NULL DEFAULT '/default_profile_header.jpg',
+    profilePhoto VARCHAR(64) NOT NULL DEFAULT '/default_profile_photo.jpg',
+    profileHeader VARCHAR(64) DEFAULT NULL,
     followings JSON DEFAULT ('[]'),
     followers JSON DEFAULT ('[]')
 );
@@ -24,6 +24,7 @@ CREATE TABLE twixs (
     authorId VARCHAR(255) NOT NULL,
     authorUsername VARCHAR(64) NOT NULL,
     authorTwixname VARCHAR(64) NOT NULL,
+    authorPhoto VARCHAR(64) NOT NULL DEFAULT '/default_profile_photo.jpg',
     textContent VARCHAR(192) NOT NULL,
     mediaContent VARCHAR(192),
     commentNumber INT NOT NULL DEFAULT 0,

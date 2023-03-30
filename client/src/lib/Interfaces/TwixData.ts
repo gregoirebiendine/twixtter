@@ -3,6 +3,7 @@ export default interface TwixData {
     authorId: string,
     authorUsername: string,
     authorTwixname: string,
+    authorPhoto: string,
     textContent: string,
     mediaContent: string | null,
     commentNumber: number,

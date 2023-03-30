@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { page } from '$app/stores';
     import type TwixtterProfileData from "$lib/Interfaces/TwixtterProfileData";
     import TwixPost from "$lib/Components/TwixPost.svelte";
     import PageLayout from "$lib/Components/PageLayout.svelte";
@@ -15,7 +16,7 @@
 </svelte:head>
 
 <PageLayout>
-    <div class="flex flex-row items-center py-2 px-4">
+    <div class="flex flex-row items-center py-3 px-4">
         <div class="">
             <a href="/feed" class="block p-2 h-fit rounded-full cursor-pointer hover:bg-gray-100">
                 <svg viewBox="0 0 24 24" class="w-[20px] h-[20px] fill-current select-none text-twixtter-gray" aria-hidden="true">
@@ -24,19 +25,25 @@
             </a>
         </div>
         <div class="ml-4">
-            <p class="font-montserrat font-bold text-xl text-twixtter-gray">{data.user.twixname}</p>
+            <p class="font-montserrat font-bold text-xl text-twixtter-gray leading-none">{data.user.twixname}</p>
             <p class="font-montserrat text-xs text-twixtter-gray-light">{data.twixs.length} Twix{data.twixs.length > 1 ? 's' : ''}</p>
         </div>
     </div>
-    <div class="w-full h-56 relative header border-b-[4px] border-twixtter-gray" style="background: url('{data.user.profileHeader}') no-repeat center center">
-        <div class="w-32 absolute bottom-0 left-4 translate-y-1/2 rounded-full bg-twixtter-gray p-1">
+    <div class="w-full h-56 relative bg-gray-400" style={data.user.profileHeader ? `background: url('${data.user.profileHeader}') no-repeat center center` : ''}>
+        <div class="w-32 absolute bottom-0 left-4 translate-y-1/2 rounded-full bg-twixtter-gray p-[2px]">
             <img class="w-full rounded-full" src={data.user.profilePhoto} alt={`${data.user.username} photo`}>
         </div>
     </div>
     <div class="flex justify-end p-4">
-        <button class="bg-twixtter-blue font-montserrat text-lg text-white font-bold px-4 py-2 rounded-full transition-all duration-300 hover:bg-twixtter-blue-dark">
-            Follow
-        </button>
+        {#if data.connectedUser && $page.params.username == data.connectedUser.username}
+            <button class="bg-gray-100 font-montserrat text-lg text-twixtter-gray font-bold px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-200">
+                Edit Profile
+            </button>
+        {:else}
+            <button class="bg-twixtter-blue font-montserrat text-lg text-white font-bold px-4 py-2 rounded-full transition-all duration-300 hover:bg-twixtter-blue-dark">
+                Follow
+            </button>
+        {/if}
     </div>
     <div class="p-4">
         <div class="">

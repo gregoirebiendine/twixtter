@@ -84,7 +84,7 @@
 
 <style lang="postcss">
     .submit-btn:disabled {
-        @apply bg-gray-400 rounded-full font-montserrat text-xl font-bold text-white uppercase p-2 mt-12;
+        @apply bg-gray-400;
     }
 
     input {

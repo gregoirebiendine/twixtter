@@ -12,9 +12,6 @@ authRouter.post('/login', passport.authenticate('local', {session: true}), (req,
 });
 
 authRouter.post('/signup', (req, res) => {
-    if (!req.body.email || !req.body.password || !req.body.username)
-        return res.status(400).send({msg: `One or more fields are missing in request body.`});
-
     db.query(`SELECT * FROM users WHERE email = ?`, [req.body.email], (err, results) => {
         if (err) {
             res.status(500).send({msg: "Internal server error"});
@@ -43,13 +40,16 @@ authRouter.post('/islogin', (req, res) => {
         res.status(401).send({user: null});
 });
 
-authRouter.post('/logout', (req, res) => {
-    req.logout((err) => {
-        if (err) {
-            res.status(500).send({msg: "Internal server error"});
-            throw err;
-        }
-        res.sendStatus(200);
+authRouter.post('/logout', (req, res, next) => {
+    req.logout(err => {
+        if (err)
+            return next(err);
+        req.session.destroy(destroyErr => {
+            if (destroyErr)
+                return next(destroyErr);
+            res.clearCookie('connect.sid');
+            res.sendStatus(200);
+        });
     });
 });
 

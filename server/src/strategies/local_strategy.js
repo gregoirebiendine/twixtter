@@ -4,11 +4,17 @@ const bcrypt = require('bcrypt');
 const db = require('../config/db');
 
 passport.serializeUser((user, cb) => {
-    cb(null, user)
+    process.nextTick(() => {
+        cb(null, user);
+    });
 });
 
 passport.deserializeUser((user, cb) => {
-    cb(null, user)
+    process.nextTick(() => {
+        db.query('SELECT * FROM users WHERE id = ?', [user.id], (err, results) => {
+            cb(err, (results.length > 0) ? results[0] : null);
+        });
+    });
 });
 
 passport.use(new LocalStrategy((username, password, cb) => {
@@ -21,8 +27,8 @@ passport.use(new LocalStrategy((username, password, cb) => {
             if (compareErr)
                 return cb(compareErr);
             if (!isValid)
-                return cb(null, false, { message: 'Incorrect username or password.' });
-            return cb(null, {id: results[0].id, username: results[0].username, email: results[0].email});
+                return cb(null, false, {message: 'Incorrect password.'});
+            return cb(null, {id: results[0].id});
         });
     });
 }));

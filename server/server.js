@@ -8,17 +8,17 @@ const app = express();
 
 app.use(express.json());
 
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    cookie: {secure: false}
-}));
-
 app.use(cors({
     origin: "http://localhost:8081",
     optionsSuccessStatus: 200,
     credentials: true
+}));
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {secure: false}
 }));
 
 app.use(passport.initialize());
