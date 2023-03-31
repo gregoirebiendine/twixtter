@@ -3,7 +3,7 @@
     import SearchBar from './SearchBar.svelte';
 </script>
 
-<section class="w-screen h-screen flex flex-row justify-center">
+<section class="w-full h-full min-h-screen flex flex-row justify-center mb-4">
     <div class="w-[16rem] h-[10rem] flex flex-col justify-between mt-2">
         <a class="w-[32px] ml-4" href="/feed">
             <img class="w-full" src="/favicon.png" alt="Twixtter icon">
@@ -25,7 +25,7 @@
             </p>
         </button>
     </div>
-    <div class="h-full w-[40rem] border-x-[1px] mx-8 border-gray-200 flex flex-col justify-start">
+    <div class="w-[40rem] h-full min-h-screen border-x-[1px] mx-8 border-gray-200 flex flex-col justify-start">
         <slot></slot>
     </div>
     <div class="flex flex-col">

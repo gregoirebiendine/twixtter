@@ -1,28 +1,42 @@
 <script lang="ts">
     import type TwixData from "$lib/Interfaces/TwixData";
+    import dayjs from 'dayjs';
 
     export let content: TwixData;
 
     function getTimeElapsedSincePost() {
-        return Math.trunc((Date.now() - new Date(content.postDate).getTime()) / 1000); 
+        let now = dayjs();
+        let postDate = dayjs(content.postDate);
+        let duration = dayjs.duration(now.diff(postDate))
+        
+        if (duration.days() > 0)
+            return postDate.format('ddd DD MMM YYYY');
+        else if (duration.hours() > 0)
+            return duration.hours() + 'h';
+        else if (duration.minutes() > 0)
+            return duration.minutes() + 'm';
+        else
+            return duration.seconds() + 's';
     }
 </script>
 
 <article class="w-full flex flex-col items-center py-6 border-b-[1px] border-gray-200" data-post-id={content.id}>
     <div class="w-full flex flex-row px-6">
-        <a href={`/user/${content.authorUsername}`} class="block mr-2">
-            <img class="w-[64px] rounded-full" src={content.authorPhoto} alt={`${content.authorUsername} photo`}>
-        </a>
+        <div class="min-w-[56px] w-[56px] mr-2">
+            <a href={`/user/${content.authorUsername}`}>
+                <img class="w-full rounded-full" src={content.authorPhoto} alt={`${content.authorUsername} photo`}>
+            </a>
+        </div>
         <div>
             <div class="ml-2">
                 <p class="font-montserrat">
                     <a href={`/user/${content.authorUsername}`} class="text-base text-twixtter-gray font-bold mr-1">{content.authorTwixname}</a>
                     <span class="text-sm text-twixtter-gray-light">@{content.authorUsername}</span>
-                    <span class="text-xs text-twixtter-gray-light">- {getTimeElapsedSincePost()}s</span>
+                    <span class="text-xs text-twixtter-gray-light">- {getTimeElapsedSincePost()}</span>
                 </p>
             </div>
             <div class="ml-2">
-                <p class="font-sans text-base text-twixtter-gray">
+                <p class="font-sans text-base text-twixtter-gray leading-normal">
                     {@html content.textContent}
                 </p>
                 {#if content.mediaContent}

@@ -1,6 +1,5 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-    import axios from 'axios';
     
     export let signid: string;
     let formEl: HTMLFormElement;
@@ -29,7 +28,15 @@
         e.preventDefault();
         const data = new FormData(formEl);
 
-        axios.post("http://localhost:8080/api/auth/login", {username: data.get('username'), password: data.get('password')}, {withCredentials: true}).then(() => {
+        fetch("http://localhost:8080/api/auth/login", {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username: data.get('username'), password: data.get('password')})
+        }).then(() => {
             goto('/feed');
         }).catch(() => {
             alert("An error has occured");
@@ -40,7 +47,15 @@
         e.preventDefault();
         const data = new FormData(formEl);
 
-        axios.post("http://localhost:8080/api/auth/signup", {email: data.get('email'), username: data.get('username'), twixname: data.get('username'), password: data.get('password')}, {withCredentials: true}).then(() => {
+        fetch("http://localhost:8080/api/auth/signup", {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: data.get('email'), username: data.get('username'), twixname: data.get('username'), password: data.get('password')})
+        }).then(() => {
             actionSignIn(e);
         }).catch(() => {
             alert("An error has occured");
