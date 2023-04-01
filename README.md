@@ -20,18 +20,28 @@ Go to the project directory
   cd twixtter
 ```
 
-Create your confidential .env file for MySQL in the root
-```
-MYSQL_ROOT_PASSWORD=YOUR_MYSQL_ROOT_PASSWORD
-MYSQL_DATABASE=twixtter_db
-MYSQL_USER=YOUR_MYSQL_USERNAME
-MYSQL_PASSWORD=YOUR_MYSQL_PASSWORD
-```
+Copy or rename .env.example file to .env and fill it with your personal tokens (MySQL, secrets, ...)
+
+
+### For production (Docker)
 
 Build and run docker image
 
 ```bash
   docker-compose up
+```
+
+
+### For development (NPM)
+
+Run locally with npm
+
+```bash
+  cd client
+  npm run dev
+  ...
+  cd server
+  npm run dev
 ```
 
 
