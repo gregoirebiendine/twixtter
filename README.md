@@ -34,13 +34,20 @@ Build and run docker image
 
 ### For development (NPM)
 
-Run locally with npm
+Install client's dependencies and run it with npm
 
 ```bash
   cd client
+  npm i
   npm run dev
-  ...
+```
+
+
+Install server's dependencies and run it with npm
+
+```bash
   cd server
+  npm i
   npm run dev
 ```
 
