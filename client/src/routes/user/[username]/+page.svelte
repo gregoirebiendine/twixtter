@@ -1,7 +1,6 @@
 <script lang="ts">
     import { page } from '$app/stores';
     import type TwixtterProfileData from "$lib/Interfaces/TwixtterProfileData";
-    import TwixPost from "$lib/Components/TwixPost.svelte";
     import PageLayout from "$lib/Components/PageLayout.svelte";
     import TwixsList from '$lib/Components/TwixsList.svelte';
 
@@ -27,7 +26,7 @@
                 </a>
             </div>
             <div class="ml-4">
-                <p class="font-montserrat font-bold text-xl text-twixtter-gray leading-none">{data.user.twixname}</p>
+                <p class="font-montserrat font-bold text-lg text-twixtter-gray leading-none">{data.user.twixname}</p>
                 <p class="font-montserrat text-xs text-twixtter-gray-light">{data.twixs.length} Twix{data.twixs.length > 1 ? 's' : ''}</p>
             </div>
         </div>
