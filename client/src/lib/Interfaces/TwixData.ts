@@ -1,4 +1,4 @@
-export default interface TwixData {
+export default interface TwixData extends Object {
     id: string,
     authorId: string,
     authorUsername: string,

@@ -7,6 +7,7 @@
     import PageLayout from "$lib/Components/PageLayout.svelte";
     import SearchBar from "$lib/Components/SearchBar.svelte";
     import { clickOutside } from "$lib/Events/ClickOutside";
+    import TwixsList from '$lib/Components/TwixsList.svelte';
 
     /** @type {import('./$types').PageServerData} */
     export let data: {connectedUser: UserData, feed: Array<TwixData>};
@@ -93,12 +94,7 @@
         </div>
     </div>
 
-    <!-- Content -->
-    <div class="flex flex-col">
-        {#each data.feed as twix}
-            <TwixPost content={twix}/>
-        {/each}
-    </div>
+    <TwixsList list={data.feed}/>
     <button on:click={logout}>LOGOUT</button>
 </PageLayout>
 

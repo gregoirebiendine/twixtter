@@ -3,6 +3,7 @@
     import type TwixtterProfileData from "$lib/Interfaces/TwixtterProfileData";
     import TwixPost from "$lib/Components/TwixPost.svelte";
     import PageLayout from "$lib/Components/PageLayout.svelte";
+    import TwixsList from '$lib/Components/TwixsList.svelte';
 
     /** @type {import('./$types').PageServerData} */
     export let data: TwixtterProfileData;
@@ -96,14 +97,5 @@
         </div>
     </div>
 
-    <!-- Content -->
-    <div class="flex flex-col">
-        {#if data.twixs.length == 0}
-            <h1 class="m-auto text-center mt-6 font-montserrat text-lg">This user hasn't posted yet.</h1>
-        {:else}
-            {#each data.twixs as twixcontent}
-                <TwixPost content={twixcontent}/>
-            {/each}
-        {/if}
-    </div>
+    <TwixsList list={data.twixs}/>
 </PageLayout>
