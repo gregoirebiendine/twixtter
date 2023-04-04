@@ -69,7 +69,7 @@
 	<title>Twixtter - Feed</title>
 </svelte:head>
 
-<PageLayout>
+<PageLayout user={data.connectedUser}>
     <SearchBar />
 
     <div class="w-full px-6 py-4 mt-6 border-y-[1px] border-gray-200 flex flex-row">

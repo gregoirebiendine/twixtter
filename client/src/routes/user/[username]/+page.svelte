@@ -15,7 +15,7 @@
 	<title>Twixtter - {data.user.twixname} (@{data.user.username})</title>
 </svelte:head>
 
-<PageLayout>
+<PageLayout user={data.connectedUser}>
     <div class="flex flex-col border-b-[1px] border-gray-200 pb-2">
         <div class="flex flex-row items-center py-3 px-4">
             <div class="">
