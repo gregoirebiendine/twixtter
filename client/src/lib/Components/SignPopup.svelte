@@ -76,8 +76,8 @@
                 <p class="font-sans font-bold text-3xl my-6 uppercase">
                     Sign In to <span class="text-twixtter-blue">Twixtter</span>
                 </p>
-                <input type="text" name='username' placeholder='Username' required bind:value={formData.username}/>
-                <input type="password" name="password" placeholder='Password' required bind:value={formData.password}/>
+                <input type="text" name='username' placeholder='Username' required maxlength=32 bind:value={formData.username}/>
+                <input type="password" name="password" placeholder='Password' required maxlength=32 bind:value={formData.password}/>
                 <button class="submit-btn bg-twixtter-blue rounded-full font-montserrat text-xl font-bold text-white uppercase p-2 mt-12 transition-all duration-300 hover:bg-twixtter-blue-dark" on:click={actionSignIn} disabled={submitDisabled}>
                     Sign In
                 </button>
@@ -85,9 +85,9 @@
                 <p class="font-montserrat font-bold text-3xl my-6 uppercase">
                     Sign Up to <span class="text-twixtter-blue">Twixtter</span>
                 </p>
-                <input type="text" name='username' placeholder='Username' required bind:value={formData.username}/>
-                <input type="text" name='email' placeholder='Email' required bind:value={formData.email}/>
-                <input type="password" name="password" placeholder='Password' required bind:value={formData.password}/>
+                <input type="text" name='username' placeholder='Username' required maxlength=32  bind:value={formData.username}/>
+                <input type="text" name='email' placeholder='Email' required maxlength=32  bind:value={formData.email}/>
+                <input type="password" name="password" placeholder='Password' required maxlength=32 bind:value={formData.password}/>
                 <button class="submit-btn bg-twixtter-blue rounded-full font-montserrat text-xl font-bold text-white uppercase p-2 mt-12 transition-all duration-300 hover:bg-twixtter-blue-dark" on:click={actionSignUp} disabled={submitDisabled}>
                     Sign Up
                 </button>

@@ -2,7 +2,7 @@ const express = require("express");
 const db = require('../../config/db');
 const { v4: uuidv4 } = require('uuid');
 const authMiddleware = require('../../middleware/auth_middleware.js');
-const {getTwixsByUsername} = require('./users.functions.js');
+const {getTwixsByUsername, getFeed} = require('./users.functions.js');
 
 const usersRouter = express.Router();
 
@@ -19,35 +19,20 @@ usersRouter.get('/profile/:username', (req, res) => {
         if (!userTwixs)
             return res.sendStatus(404);
         res.status(200).send({connectedUser: (req.user) ? req.user : null, user: userRes[0], twixs: userTwixs});
-        // db.query(`SELECT * FROM twixs WHERE authorId = ?`, [userRes[0].id], (err, twixsRes) => {
-        //     if (err) {
-        //         res.status(500).send({msg: "Internal server error"});
-        //         throw err;
-        //     }
-        //     res.status(200).send({connectedUser: (req.user) ? req.user : null, user: userRes[0], twixs: twixsRes});
-        // });
     });
 });
 
-usersRouter.get('/feed', authMiddleware, (req, res) => {
-    res.status(200).send({
-        connectedUser: (req.user) ? req.user : null,
-        feed: [
-            {
-                id: '1',
-                authorId: req.user.id,
-                authorUsername: req.user.username,
-                authorTwixname: 'melio',
-                authorPhoto: '/default_profile_photo.jpg',
-                textContent: "Ceci est un Twix test.",
-                mediaContent: null,
-                commentNumber: 0,
-                retwixNumber: 0,
-                likeNumber: 0,
-                postDate: new Date()
-            }
-        ]    
-    });
+usersRouter.get('/feed', authMiddleware, async (req, res) => {
+    let followers = JSON.parse(req.user.followers);
+
+    if (followers.length == 0)
+        res.status(200).send({ connectedUser: req.user, feed: [] });
+    else {
+        const feedData = await getFeed(followers);
+        if (!data)
+            return res.sendStatus(500);
+        res.status(200).send({ connectedUser: req.user, feed: feedData });
+    }
 });
 
 usersRouter.get('/:username/twix', async (req, res) => {
