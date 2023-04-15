@@ -2,15 +2,38 @@
     import { page } from '$app/stores';
     import SearchBar from './SearchBar.svelte';
     import type UserData from '$lib/Interfaces/UserData';
+    import Requester from '$lib/Classes/Requester';
+    import { goto } from '$app/navigation';
+    import { clickOutside } from '$lib/Events/ClickOutside';
 
     export let user: UserData | null;
+
+    let miniProfileEl: HTMLElement;
+
+    function logout() {
+        Requester.post('http://localhost:8080/api/auth/logout').then(() => {
+            goto("/");
+        }).catch((err) => {
+            console.error(err);
+        });
+    };
+
+    function toggleMiniProfile(state: boolean) {
+        if (state == true) {
+            miniProfileEl.classList.remove("invisible");
+            miniProfileEl.classList.replace("opacity-0", "opacity-100");
+        } else {
+            miniProfileEl.classList.replace("opacity-100", "opacity-0");
+            setTimeout(() => miniProfileEl.classList.add("invisible"), 200);
+        }
+    }
 </script>
 
 <section class="w-full h-full min-h-screen flex flex-row justify-center">
     <div class="w-full h-full min-h-screen flex justify-end relative">
         <div class="h-full flex flex-col justify-between fixed top-0">
-            <div class="flex flex-col mt-2 mx-8">
-                <a class="w-[32px] mx-4 my-2" href="/feed">
+            <div class="flex flex-col mt-2">
+                <a class="w-[32px] ml-4 my-2" href="/feed">
                     <img class="w-full" src="/favicon.png" alt="Twixtter icon">
                 </a>
                 <button class="px-4 py-2 my-3 w-fit hover-gray">
@@ -31,7 +54,37 @@
                 </button>
             </div>
             {#if user}
-                <p>mdr profile</p>
+                <div class="w-full relative">
+                    <div id="profile-settings-popup" class="w-[90%] h-24 absolute bottom-full left-0 rounded-xl z-10 bg-gray-100 mb-4 invisible opacity-0 transition-all" bind:this={miniProfileEl}>
+                        <div class="w-full h-full relative flex flex-col justify-center">
+                            <a href={`/user/${user.username}`} class="block w-full text-center py-2 hover:bg-gray-200">
+                                <p class="font-montserrat font-bold text-base text-twixtter-gray">
+                                    Profile
+                                </p>
+                            </a>
+                            <button class="w-full py-2 hover:bg-gray-200" on:click={logout}>
+                                <p class="font-montserrat font-bold text-base text-twixtter-gray">
+                                    Logout
+                                </p>
+                            </button>
+                            <svg class="w-6 absolute -bottom-4 left-1/2 -translate-x-1/2 rotate-180 text-gray-100" viewBox="0 0 24 24" aria-hidden="true">
+                                <g class="fill-current"><path d="M22 17H2L12 6l10 11z"></path></g>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="w-fit flex flex-row justify-center items-center px-6 py-2 hover-gray mr-4 mb-2" on:click={() => toggleMiniProfile(true)} use:clickOutside={() => toggleMiniProfile(false)}>
+                        <div class="w-12 rounded-full mr-4">
+                            <img class="w-full rounded-full" src={user.profilePhoto} alt={`${user.username} photo`}>
+                        </div>
+                        <p class="font-montserrat leading-[1.2]">
+                            <span class="text-lg text-twixtter-gray font-bold leading-none">{user.twixname}</span><br>
+                            <span class="text-sm text-twixtter-gray-light leading-none">@{user.username}</span>
+                        </p>
+                        <svg class="w-[20px] ml-16" viewBox="0 0 24 24" aria-hidden="true">
+                            <g><path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path></g>
+                        </svg>
+                    </button>
+                </div>
             {/if}
         </div>
     </div>
@@ -83,5 +136,9 @@
 
     .hover-gray:hover {
         @apply bg-gray-100;
+    }
+
+    #profile-settings-popup {
+        filter: drop-shadow(#b2b2b2 0px 0px 7px);
     }
 </style>

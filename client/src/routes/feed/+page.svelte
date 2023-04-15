@@ -16,14 +16,6 @@
     let hrTwixForm: HTMLHRElement;
     let sendTwixBtnDisabled: boolean = true;
 
-    function logout() {
-        Requester.post('http://localhost:8080/api/auth/logout').then(() => {
-            goto("/");
-        }).catch((err) => {
-            console.error(err);
-        });
-    };
-
     function handleTextAreaInput(e: Event) {
         const textArea: HTMLTextAreaElement = e.target as HTMLTextAreaElement;
 
@@ -87,7 +79,6 @@
     </div>
 
     <TwixsList list={data.feed}/>
-    <button on:click={logout}>LOGOUT</button>
 </PageLayout>
 
 <style lang="postcss">
