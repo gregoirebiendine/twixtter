@@ -3,11 +3,11 @@
     
     import type TwixData from "$lib/Interfaces/TwixData";
     import type UserData from "$lib/Interfaces/UserData";
-    import TwixPost from "$lib/Components/TwixPost.svelte";
     import PageLayout from "$lib/Components/PageLayout.svelte";
     import SearchBar from "$lib/Components/SearchBar.svelte";
     import { clickOutside } from "$lib/Events/ClickOutside";
     import TwixsList from '$lib/Components/TwixsList.svelte';
+    import Requester from '$lib/Classes/Requester';
 
     /** @type {import('./$types').PageServerData} */
     export let data: {connectedUser: UserData, feed: Array<TwixData>};
@@ -17,15 +17,15 @@
     let sendTwixBtnDisabled: boolean = true;
 
     function logout() {
-        fetch("http://localhost:8080/api/auth/logout", {method: 'POST', credentials: 'include'}).then(() => {
+        Requester.post('http://localhost:8080/api/auth/logout').then(() => {
             goto("/");
         }).catch((err) => {
-            console.log(err);
+            console.error(err);
         });
     };
 
     function handleTextAreaInput(e: Event) {
-        let textArea: HTMLTextAreaElement = e.target as HTMLTextAreaElement;
+        const textArea: HTMLTextAreaElement = e.target as HTMLTextAreaElement;
 
         if ((e as InputEvent).inputType == "deleteContentBackward")
             textArea.style.height = "auto";
@@ -42,25 +42,17 @@
 
     function postTwix() {
         const formData = new FormData(twixForm);
-        fetch('http://localhost:8080/api/users/twix', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                textContent: formData.get('textContent'),
-                mediaContent: null,
-                postDate: new Date().toISOString().slice(0, 19).replace('T', ' ')
-            })
+        Requester.post('http://localhost:8080/api/users/twix', {
+            textContent: formData.get('textContent'),
+            mediaContent: null,
+            postDate: new Date().toISOString().slice(0, 19).replace('T', ' ')
         }).then(() => {
-            let textArea: HTMLTextAreaElement = document.querySelector('textarea') as HTMLTextAreaElement;
+            const textArea: HTMLTextAreaElement = document.querySelector('textarea') as HTMLTextAreaElement;
             textArea.value = '';
             textArea.style.height = "auto";
-            sendTwixBtnDisabled = (textArea.value.length > 0) ? false : true;
+            sendTwixBtnDisabled = true;
         }).catch(err => {
-            alert(err);
+            console.error(err);
         });
     }
 </script>
