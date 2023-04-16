@@ -1,5 +1,7 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
+    import Requester from '$lib/Classes/Requester';
+    import PopupLayout from './PopupLayout.svelte';
     
     export let signid: string;
     let formEl: HTMLFormElement;
@@ -26,46 +28,31 @@
 
     function actionSignIn(e: Event) {
         e.preventDefault();
-        const data = new FormData(formEl);
+        const formData = new FormData(formEl);
+        const dataObj = {username: formData.get('username'), password: formData.get('password')};
 
-        fetch("http://localhost:8080/api/auth/login", {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({username: data.get('username'), password: data.get('password')})
-        }).then(() => {
+        Requester.post("http://localhost:8080/api/auth/login", dataObj).then(() => {
             goto('/feed');
         }).catch(() => {
-            alert("An error has occured");
+            console.error("An error has occured");
         });
     };
 
     function actionSignUp(e: Event) {
         e.preventDefault();
-        const data = new FormData(formEl);
+        const formData = new FormData(formEl);
+        const dataObj = {email: formData.get('email'), username: formData.get('username'), twixname: formData.get('username'), password: formData.get('password')};
 
-        fetch("http://localhost:8080/api/auth/signup", {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({email: data.get('email'), username: data.get('username'), twixname: data.get('username'), password: data.get('password')})
-        }).then(() => {
+        Requester.post("http://localhost:8080/api/auth/signup", dataObj).then(() => {
             actionSignIn(e);
         }).catch(() => {
-            alert("An error has occured");
+            console.error("An error has occured");
         });
     };
 </script>
 
-<section class="test w-full h-full fixed top-0 left-0 z-50 flex justify-center items-center transition-all duration-200 bg-gray-800 bg-opacity-80" data-aos="fade-in" data-aos-duration=500>
+<PopupLayout>
     <div class="bg-white rounded-xl text-twixtter-gray p-20 relative" data-aos="fade-up" data-aos-duration=1000>
-
         <button on:click class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100">
             <img class="w-[16px] select-none" src="/close-btn.png" alt="Close btn">
         </button>
@@ -95,7 +82,7 @@
             {/if}
         </form>
     </div>
-</section>
+</PopupLayout>
 
 <style lang="postcss">
     .submit-btn:disabled {

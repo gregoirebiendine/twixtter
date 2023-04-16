@@ -13,7 +13,7 @@
     }
 </script>
 
-<div id="searchbar" class={`rounded-full bg-gray-100 flex flex-row items-center mt-2 border border-gray-100 ${(!little) ? 'mx-8' : ''} ${$$props.class}`} bind:this={searchBar}>
+<div id="searchbar" class={`rounded-full bg-gray-100 flex flex-row items-center mt-2 transition-all border border-gray-100 ${(!little) ? 'mx-8' : ''} ${$$props.class}`} bind:this={searchBar}>
     <div class="px-6">
         <img class="w-[16px]" src="/search-icon.png" alt="search icon" />
     </div>

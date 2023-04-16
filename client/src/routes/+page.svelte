@@ -1,6 +1,6 @@
 <script lang="ts">
     import SignButton from "$lib/Components/SignButton.svelte";
-    import SignPopup from "$lib/Components/SignPopup.svelte";
+    import SignPopup from "$lib/Components/Popups/SignPopup.svelte";
 
     let isPopupToggled: boolean = false;
     let popupSignId: string;

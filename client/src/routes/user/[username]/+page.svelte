@@ -3,17 +3,29 @@
     import type TwixtterProfileData from "$lib/Interfaces/TwixtterProfileData";
     import PageLayout from "$lib/Components/PageLayout.svelte";
     import TwixsList from '$lib/Components/TwixsList.svelte';
+    import PopupLayout from '$lib/Components/Popups/PopupLayout.svelte';
+    import EditProfilePopup from '$lib/Components/Popups/EditProfilePopup.svelte';
 
     /** @type {import('./$types').PageServerData} */
     export let data: TwixtterProfileData;
 
     let followings = JSON.parse(data.user.followings);
     let followers = JSON.parse(data.user.followers);
+
+    let isPopupToggled: boolean = false;
+
+    function togglePopup() {
+        isPopupToggled = !isPopupToggled;
+    }
 </script>
 
 <svelte:head>
 	<title>Twixtter - {data.user.twixname} (@{data.user.username})</title>
 </svelte:head>
+
+{#if isPopupToggled}
+    <EditProfilePopup on:click={togglePopup}></EditProfilePopup>
+{/if}
 
 <PageLayout user={data.connectedUser}>
     <div class="flex flex-col border-b-[1px] border-gray-200 pb-2">
@@ -37,7 +49,7 @@
         </div>
         <div class="flex justify-end p-4">
             {#if data.connectedUser && $page.params.username == data.connectedUser.username}
-                <button class="bg-gray-100 font-montserrat text-lg text-twixtter-gray font-bold px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-200">
+                <button class="bg-gray-100 font-montserrat text-lg text-twixtter-gray font-bold px-4 py-2 rounded-full transition-all duration-300 hover:bg-gray-200" on:click={togglePopup}>
                     Edit Profile
                 </button>
             {:else}
