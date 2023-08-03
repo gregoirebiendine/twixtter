@@ -14,6 +14,9 @@ module.exports = {
         'twixtter-purple1': "#8044a8",
         'twixtter-purple2': "#693b9d",
         'twixtter-purple3': "#66278f",
+
+
+        'twixtter-blue1': "#4C64A7",
       },
 			fontFamily: {
 				'montserrat': ['Montserrat', 'sans-serif'],

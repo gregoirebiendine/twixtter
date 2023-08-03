@@ -1,30 +1,29 @@
 <script lang="ts">
+    import type { PanelID } from '$lib/Interfaces/PopupPanel';
     import { goto } from '$app/navigation';
+    import { createEventDispatcher } from 'svelte';
     import Requester from '$lib/Classes/Requester';
     import PopupLayout from './PopupLayout.svelte';
+    import SignPanelSubmit from '../SignElements/SignPanelSubmit.svelte';
+    import type SignFormData from '$lib/Interfaces/SignFormData';
     
-    export let signid: string;
+    export let panelID: PanelID;
     let formEl: HTMLFormElement;
     let submitDisabled: boolean = true;
 
-    interface TwixtterSignFormData extends Object {
-        username: string,
-        email: string,
-        password: string,
-    }
-
-    const formData: TwixtterSignFormData = {
-        username: '',
-        email: '',
-        password: '',
-    };
+    const dispatch = createEventDispatcher();
+    const formData: SignFormData = {username: '', email: '', password: ''};
 
     $: {
-        if (Object.values(formData).every((el: string, idx: number) => {return (signid == 'signin' && idx == 1) ? true : el.length != 0}))
+        if (Object.values(formData).every((el: string, idx: number) => {return (panelID == 'signin' && idx == 1) ? true : el.length != 0}))
             submitDisabled = false;
         else
             submitDisabled = true;
     };
+
+    function noAccountAction() {
+		dispatch('clickNoAccount');
+	}
 
     function actionSignIn(e: Event) {
         e.preventDefault();
@@ -51,9 +50,9 @@
     };
 </script>
 
-<PopupLayout>
-    <div class="bg-twixtter-bg rounded-xl text-white p-20 relative {signid === 'signin' ? 'pb-6' : ''}" data-aos="fade-up" data-aos-duration=1000>
-        <button on:click class="absolute top-4 right-4 p-2 rounded-full hover:bg-twixtter-gray-light">
+<PopupLayout on:click>
+    <div class="bg-twixtter-bg rounded-2xl text-white p-20 relative {panelID === 'signin' ? 'pb-6' : ''}">
+        <button on:click class="absolute top-4 right-4 p-2 rounded-full transition-all duration-300 hover:bg-slate-200 hover:bg-opacity-30">
             <svg class="w-[20px] select-none" xmlns="http://www.w3.org/2000/svg" width="18.828" height="18.828" viewBox="0 0 18.828 18.828">
                 <g id="Groupe_1" data-name="Groupe 1" transform="translate(-168.086 -159.086)">
                   <line y1="16" x2="16" transform="translate(169.5 160.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
@@ -61,31 +60,29 @@
                 </g>
             </svg>
         </button>
+        
         <form class="flex flex-col justify-center" bind:this={formEl}>
-            <img class="w-[48px] m-auto" src="/favicon.png" alt="Twixtter icon">
-
-            {#if signid == 'signin'}
-                <p class="font-sans font-bold text-3xl my-6 uppercase tracking-wider">
+            {#if panelID == 'signin'}
+                <p class="font-sans text-3xl my-6 uppercase tracking-wider">
+                    <img class="w-[48px] inline-block align-middle mr-2" src="/favicon.png" alt="Twixtter icon">
                     Sign In to <span class="text-twixtter-purple1">Twixtter</span>
                 </p>
                 <input type="text" name='username' placeholder='Username' required maxlength=32 bind:value={formData.username}/>
                 <input type="password" name="password" placeholder='Password' required maxlength=32 bind:value={formData.password}/>
-                <button class="submit-btn bg-twixtter-purple1 rounded-full font-montserrat text-xl font-bold text-white uppercase p-2 mt-12 transition-all duration-300 hover:bg-opacity-90" on:click={actionSignIn} disabled={submitDisabled}>
-                    Sign In
-                </button>
+                <SignPanelSubmit on:click={actionSignIn} label="Sign In" disabled={submitDisabled}/>
                 <p class="font-sans font-bold text-center text-base mt-20 tracking-wide">
-                    No account ? <a class="text-twixtter-purple1" href="/">Sign up here</a>
+                    No account ? <button class="text-twixtter-purple1 hover:underline" on:click={noAccountAction}>Sign up here</button>
                 </p>
-            {:else if signid == 'signup'}
-                <p class="font-montserrat font-bold text-3xl my-6 uppercase tracking-wider">
+
+            {:else if panelID == 'signup'}
+                <p class="font-sans text-3xl my-6 uppercase tracking-wider">
+                    <img class="w-[48px] inline-block align-middle mr-2" src="/favicon.png" alt="Twixtter icon">
                     Sign Up to <span class="text-twixtter-purple1">Twixtter</span>
                 </p>
                 <input type="text" name='username' placeholder='Username' required maxlength=32  bind:value={formData.username}/>
                 <input type="text" name='email' placeholder='Email' required maxlength=32  bind:value={formData.email}/>
                 <input type="password" name="password" placeholder='Password' required maxlength=32 bind:value={formData.password}/>
-                <button class="submit-btn bg-twixtter-purple1 rounded-full font-montserrat text-xl font-bold text-white uppercase p-2 mt-12 transition-all duration-300 hover:bg-opacity-90" on:click={actionSignUp} disabled={submitDisabled}>
-                    Sign Up
-                </button>
+                <SignPanelSubmit on:click={actionSignUp} label="Sign Up" disabled={submitDisabled}/>
                     
             {/if}
         </form>
@@ -93,14 +90,10 @@
 </PopupLayout>
 
 <style lang="postcss">
-    .submit-btn:disabled {
-        @apply bg-gray-400;
-    }
-
     input {
         @apply font-sans text-lg bg-transparent text-white tracking-wide mt-6 outline-none border-b-2;
 
         border-image-slice: 1;
-        border-image-source: linear-gradient(90deg, #66278f 0%, rgba(170,115,210,0.2) 100%);
+        border-image-source: linear-gradient(45deg, #4c64a7 0%, #693b9d 100%);
     }
 </style>
